@@ -28,7 +28,10 @@ for(let i=0;i<rows;i++){
     for(let j=0;j<col;j++){
         let cell=document.createElement("div");
         cell.setAttribute("class", "cell");
-        cell.setAttribute("contenteditable","true")
+        cell.setAttribute("contenteditable","true");
+        cell.setAttribute("spellcheck","false");
+        cell.setAttribute("rid",i);
+        cell.setAttribute("cid",j);
         rowCont.appendChild(cell);
         addListnerForAddressBarDisplay(cell,i,j);
     }
@@ -42,3 +45,8 @@ function addListnerForAddressBarDisplay(cell , i, j){
         addressBar.value=`${colID}${i+1}`;
     })
 }
+
+
+// Default click on first cell
+let firstCell=document.querySelector(".cell");
+firstCell.click();
