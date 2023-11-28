@@ -12,6 +12,7 @@ for( let i=0;i<rows;i++){
             fontSize : "14",
             fontColor : "#000000",
             bgColor : "#000000",
+            value: "",
         }
         sheetRow.push(cellProp);
     }
