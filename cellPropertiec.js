@@ -13,6 +13,9 @@ for( let i=0;i<rows;i++){
             fontColor : "#000000",
             bgColor : "#000000",
             value: "",
+            formula:"",
+            children: [],
+
         }
         sheetRow.push(cellProp);
     }
@@ -190,6 +193,10 @@ function addListnerToAttachCellProperties(cell){
                 break;
         }
 
+        let formulaBar=document.querySelector(".formula-bar");
+        formulaBar.value=cellProp.formula;
+        cell.value=cellProp.value;
+
 
     });
 
@@ -197,6 +204,7 @@ function addListnerToAttachCellProperties(cell){
 
 
 
+// will retun current active cell and DB 
 function activeCell(address){
     let[rid,cid]= decodeAddress(address);
     // accecc the cell
@@ -205,6 +213,7 @@ function activeCell(address){
     return [cell,cellPropDb];
 }
 
+// decode the addess <- return row and col
 function decodeAddress(address){
     let rowID=Number(address.slice(1)-1);
     let colID=Number(address.charCodeAt(0)-65);
