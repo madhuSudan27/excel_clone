@@ -33,13 +33,12 @@ function isCyclePresent(graphStorageArray){
         for(let j=0;j<col;j++){
             if(visited[i][j] === false){
                 let result=dfsCheckCycle(graphStorageArray, i, j, visited, dfsVisited);
-                if(result === true) return true;
+                if(result === true) return [i,j];
             }
         }
     }
 
-    return false;
-
+    return null;
 }
 
 function dfsCheckCycle(graphStorageArray, i, j, visited, dfsVisited){

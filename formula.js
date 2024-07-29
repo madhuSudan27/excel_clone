@@ -20,7 +20,7 @@ for( let i=0;i<rows;i++){
 
 
 let formulaBar=document.querySelector(".formula-bar");
-formulaBar.addEventListener("keydown",(e)=>{
+formulaBar.addEventListener("keydown",async (e)=>{
     let inputFormula=formulaBar.value;
     if(e.key === "Enter" && inputFormula){
 
@@ -37,8 +37,12 @@ formulaBar.addEventListener("keydown",(e)=>{
 
         let checkCycle=isCyclePresent(graphStorageArray);
 
-        if(checkCycle === true){
-            alert("A cycle is Found please enter other formula");
+        if(checkCycle){
+            let response = confirm("Your formula is Cyclic, Do you want to trace path ?");
+            while( response === true){
+                await tracePath(graphStorageArray, checkCycle);
+                response= confirm("Your formula is Cyclic, Do you want to trace path ?");
+            } 
             removeChildrenFromGraphArray(address,inputFormula);
             return;
         }
