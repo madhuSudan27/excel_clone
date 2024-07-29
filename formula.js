@@ -2,9 +2,12 @@
 for( let i=0;i<rows;i++){
     for(let j=0;j<col;j++){
         let cell=document.querySelector(`.cell[rid="${i}"][cid="${j}"]`);
+        // console.log(cell);
         cell.addEventListener("blur",(e)=>{
             let address=addressBar.value;
             let [cell,cellProp]=activeCell(address);
+
+            // if prev formula is curr formula do nothing 
             let enteredData=cell.innerText;
             if(enteredData === cellProp.value) return; // do nothing 
 
@@ -59,7 +62,7 @@ formulaBar.addEventListener("keydown",async (e)=>{
 });
 
 
-//
+
 function addChildrenToGraphArray(childAddress, formula){
     // now i need to push this value(index) in the parent array
 
@@ -121,8 +124,8 @@ function removeChildrenFromParent(formula){
 
 }
 
-// need to chnage the value of children if parent changes 
-
+// need to change the value of children if parent changes 
+// update the value recursively 
 function updateChildren(parentAddreess){
     let [childrenCell,childrenCellProp]=activeCell(parentAddreess);
     let children=childrenCellProp.children;

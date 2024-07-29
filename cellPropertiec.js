@@ -1,8 +1,11 @@
+// the actual storage 
 let sheetDb=[];
 
 for( let i=0;i<rows;i++){
+    // each row[i][j] index has a object 
     let sheetRow=[];
     for(let  j=0;j<col;j++){
+        // object for cell properties 
         let cellProp={
             bold : false,
             italic : false,
@@ -14,7 +17,7 @@ for( let i=0;i<rows;i++){
             bgColor : "#000000",
             value: "",
             formula:"",
-            children: [],
+            children: [], // to handle cycle <- helps to form graph as a node child 
 
         }
         sheetRow.push(cellProp);
@@ -31,6 +34,7 @@ let fontFamily= document.querySelector(".font-family-prop");
 let fontColor=document.querySelector(".font-color-prop");
 let bgColor=document.querySelector(".Bg-color-prop");
 let alignment=document.querySelectorAll(".alignment");
+
 let leftAlign=alignment[0];
 let centerAlign=alignment[1];
 let rightAlign=alignment[2];
@@ -39,6 +43,8 @@ let rightAlign=alignment[2];
 
 let activeColor="#d1d8e0"
 let inactiveColor="#ecf0f1"
+
+
 // Two way binding 
 // attach  listners
 
@@ -81,8 +87,6 @@ fontSize.addEventListener("change",()=>{
     cellPropDb.fontSize=fontSize.value;
     cell.style.fontSize=cellPropDb.fontSize+"px";
     fontSize.value=cellPropDb.fontSize;
-
-
 });
 
 fontFamily.addEventListener("change",()=>{
@@ -114,11 +118,14 @@ bgColor.addEventListener("change", (e)=>{
 
 alignment.forEach((alignElem) => {
     alignElem.addEventListener("click", (e)=>{
-        console.log("clicked");
+        // console.log("clicked");
         let address=addressBar.value;
         let [cell,cellPropDb]= activeCell(address);
 
+
         let alignValue=e.target.classList[0];
+
+
         cellPropDb.alignment=alignValue;
         cell.style.textAlign=cellPropDb.alignment;
 
@@ -196,8 +203,6 @@ function addListnerToAttachCellProperties(cell){
         let formulaBar=document.querySelector(".formula-bar");
         formulaBar.value=cellProp.formula;
         cell.value=cellProp.value;
-
-
     });
 
 }
@@ -207,7 +212,8 @@ function addListnerToAttachCellProperties(cell){
 // will retun current active cell and DB 
 function activeCell(address){
     let[rid,cid]= decodeAddress(address);
-    // accecc the cell
+    // access the cell 
+    //  select elements with the class cell that also have attributes rid and cid with values matching the values of the rid and cid variables
     let cell=document.querySelector(`.cell[rid="${rid}"][cid="${cid}"]`);
     let cellPropDb=sheetDb[rid][cid];
     return [cell,cellPropDb];

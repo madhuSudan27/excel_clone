@@ -3,6 +3,7 @@ let graphStorageArray=[];
 
 for(let i=0;i<rows;i++){
     let graphRow=[];
+    // more than one children
     for(let j=0;j<col;j++){
         // each graphRow will have an array 
         graphRow.push([]);

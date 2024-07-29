@@ -95,6 +95,9 @@ body{
     width: 2vw;
     
 }
+.sheet-add-icon:hover{
+    cursor: default;
+}
 .sheet-folder-cont{
     height: 70%;
     width: 5rem;
